@@ -13,6 +13,11 @@ class Game extends StatelessWidget {
   }
 }
 
+class PlayingCard{
+  String suite = '';
+  String value = '';
+}
+
 class GamePage extends StatefulWidget {
   @override
   GamePageState createState() => GamePageState();
@@ -126,14 +131,19 @@ class GamePageState extends State<GamePage> {
 
   Widget playingCardWidget(value, suite){
     return Container(
-        color: Colors.white,
+
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(5.0)
+        ),
         child: Column(
             children: <Widget>[
               Text(
-                "["+value,
+                value,
               ),
               Text(
-                  suite+"]"
+                  suite
               ),
             ]
         )
