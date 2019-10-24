@@ -5,7 +5,7 @@ import 'CardRank.dart';
 class Deck
 {
 
-  List<Card> _deck = new List(52);
+  List<Card> _deck = new List();
 
   Deck ()
   {
