@@ -50,42 +50,36 @@ class GamePageState extends State<GamePage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Game"),
+        title: Text("Poker Table"),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-
-            buildOpponentsCards(),
-
-            SizedBox(height: 50),
-
-            buildCommunityCards(),
-
-            SizedBox(height: 50),
-
-            buildPlayerCards(),
-
-            SizedBox(height: 50),
-
-            buildShowFlopButton(),
-          ],
-        ),
+        child: Container(
+          color: Colors.green,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              opponentsCardsWidget(),
+              SizedBox(height: 50),
+              buildCommunityCards(),
+              SizedBox(height: 50),
+              playerCardsWidget(),
+              SizedBox(height: 50),
+              actionButtonWidget(),
+            ],
+          ),
+        )
       ),
 
     );
   }
 
-  Widget buildOpponentsCards(){
+  Widget opponentsCardsWidget(){
     return Column(
       children: <Widget>[
         Text(
           'Opponents Cards',
         ),
-        Text(
-            '[${opponentCards[0].toString()}] [${opponentCards[1].toString()}]'
-        ),
+        cardHandWidget(opponentCards)
       ]
     );
   }
@@ -103,22 +97,52 @@ class GamePageState extends State<GamePage> {
     );
   }
 
-  Widget buildPlayerCards(){
+  Widget playerCardsWidget(){
     return Column(
         children: <Widget>[
           Text(
             'My Cards',
           ),
-          Text(
-              '[${playerCards[0].toString()}] [${playerCards[1].toString()}]'
-          ),
+          Container(
+              alignment: Alignment.center,
+              child: cardHandWidget(playerCards)
+          )
         ]
     );
   }
 
-  Widget buildShowFlopButton(){
+  Widget cardHandWidget(cards){
+    return Container(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            playingCardWidget(cards[0].toString(), "Heart"),
+            SizedBox(width: 20),
+            playingCardWidget(cards[1].toString(), "Heart"),
+          ],
+        )
+    );
+  }
 
-    return Column(
+  Widget playingCardWidget(value, suite){
+    return Container(
+        color: Colors.white,
+        child: Column(
+            children: <Widget>[
+              Text(
+                "["+value,
+              ),
+              Text(
+                  suite+"]"
+              ),
+            ]
+        )
+    );
+  }
+
+  Widget actionButtonWidget(){
+    return Row(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           FlatButton(
               color: Colors.blue,
@@ -132,6 +156,7 @@ class GamePageState extends State<GamePage> {
               },
               child: Text("Show Flop")
           ),
+          SizedBox(width: 20),
           FlatButton(
               color: Colors.blue,
               textColor: Colors.white,
@@ -142,6 +167,7 @@ class GamePageState extends State<GamePage> {
               },
               child: Text("Show Turn")
           ),
+          SizedBox(width: 20),
           FlatButton(
               color: Colors.blue,
               textColor: Colors.white,
