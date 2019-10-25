@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'Deck.dart';
+import 'Card.dart' as c;
 
 class Game extends StatelessWidget {
   @override
@@ -13,22 +15,13 @@ class Game extends StatelessWidget {
   }
 }
 
-class PlayingCard{
-  String suite = '';
-  String value = '';
-  PlayingCard(value, suite){
-    this.value = value;
-    this.suite = suite;
-  }
-}
-
 class GamePage extends StatefulWidget {
   @override
   GamePageState createState() => GamePageState();
 }
 
 class GamePageState extends State<GamePage> {
-  var deck;
+  Deck deck;
   var flop;
   var turn;
   var river;
@@ -41,16 +34,17 @@ class GamePageState extends State<GamePage> {
   var commCard5Color = Colors.white;
 
   initCards(){
-    deck = [2,3,4,5,6,7,8,9,10,11,12,13,14];
     dealCards();
   }
 
   dealCards(){
-    playerCards = [PlayingCard('3', 'Heart'), PlayingCard('4', 'Heart')];
-    opponentCards = [PlayingCard('10', 'Spade'), PlayingCard('J', 'Spade')];
-    flop = [PlayingCard('7', 'Heart'), PlayingCard('8', 'Spade'), PlayingCard('9', 'Spade')];
-    turn = PlayingCard('5', 'Heart');
-    river = PlayingCard('6', 'Heart');
+    deck = new Deck();
+    deck.shuffle();
+    playerCards = [deck.deal(), deck.deal()];
+    opponentCards = [deck.deal(), deck.deal()];
+    flop = [deck.deal(), deck.deal(), deck.deal()];
+    turn = deck.deal();
+    river = deck.deal();
   }
 
   @override
@@ -152,7 +146,7 @@ class GamePageState extends State<GamePage> {
     );
   }
 
-  Widget playingCardWidget(card, color){
+  Widget playingCardWidget(c.Card card, color){
     return Container(
 
         decoration: BoxDecoration(
@@ -163,11 +157,11 @@ class GamePageState extends State<GamePage> {
         child: Column(
             children: <Widget>[
               Text(
-                card.value,
+                card.getRankString(),
                 style: TextStyle(color: color),
               ),
               Text(
-                  card.suite,
+                  card.getSuitString(),
                   style: TextStyle(color: color),
               ),
             ]
