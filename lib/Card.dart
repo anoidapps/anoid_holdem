@@ -19,9 +19,19 @@ class Card
     return this._suit;
   }
 
+  getSuitString ()
+  {
+    return describeEnum(_suit);
+  }
+
   getRank ()
   {
     return this._rank;
+  }
+
+  getRankString ()
+  {
+    return describeEnum(_rank);
   }
 
   show ()
@@ -34,11 +44,13 @@ class Card
     this._visible = false;
   }
 
+  // Returns visible value
   getVisible ()
   {
     return this._visible;
   }
 
+  // Compares Cards based on index value;
   compare (Card card)
   {
     if (this._rank.index == card._rank.index)
@@ -51,6 +63,7 @@ class Card
       return 1;
   }
 
+  // Returns String
   toString ()
   {
     String nameRank = describeEnum(this._rank);
