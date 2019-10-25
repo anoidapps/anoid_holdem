@@ -14,21 +14,25 @@ class Card
     this._rank = rank;
   }
 
+  // Returns Enum of Suit
   getSuit ()
   {
     return this._suit;
   }
 
+  // Returns String of Suit
   getSuitString ()
   {
     return describeEnum(this._suit);
   }
 
+  // Returns Enum of Rank
   getRank ()
   {
     return this._rank;
   }
 
+  // Returns String Rank
   getRankString ()
   {
     return describeEnum(this._rank);
@@ -76,6 +80,7 @@ class Card
     return this._name;
   }
 
+  // Parses the class name off of the enum
   // https://api.flutter.dev/flutter/foundation/describeEnum.html
   String describeEnum(Object enumEntry)
   {
