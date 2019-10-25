@@ -21,7 +21,7 @@ class Card
 
   getSuitString ()
   {
-    return describeEnum(_suit);
+    return describeEnum(this._suit);
   }
 
   getRank ()
@@ -31,14 +31,16 @@ class Card
 
   getRankString ()
   {
-    return describeEnum(_rank);
+    return describeEnum(this._rank);
   }
 
+  // Visible = True
   show ()
   {
     this._visible = true;
   }
 
+  // Visible = False
   hide ()
   {
     this._visible = false;

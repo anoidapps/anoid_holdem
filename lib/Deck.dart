@@ -22,7 +22,7 @@ class Deck
   // Used to shuffle the Deck;
   shuffle ()
   {
-    this.shuffle();
+    this._deck.shuffle();
   }
 
   // Used to deal the top card of the Deck;
