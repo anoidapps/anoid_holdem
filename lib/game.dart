@@ -149,8 +149,6 @@ class GamePageState extends State<GamePage> {
   }
 
   Widget playingCardWidget(c.Card card, double opacity){
-    print(card.toString());
-    print(card.getRankCharacter());
     return Container(
 
         decoration: BoxDecoration(
