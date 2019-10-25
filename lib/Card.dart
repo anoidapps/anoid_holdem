@@ -6,6 +6,7 @@ class Card
   var _suit;
   var _rank;
   var _suitCharacter;
+  var _rankCharacter;
 
   String _name;
   bool _visible = false;
@@ -16,6 +17,7 @@ class Card
     this._rank = rank;
 
     suitCharacterAssign (_suit);
+    rankCharacterAssign (_rank);
   }
 
   // Returns Enum of Suit
@@ -40,6 +42,11 @@ class Card
   getRank ()
   {
     return this._rank;
+  }
+
+  getRankCharacter ()
+  {
+    return this._rankCharacter;
   }
 
   // Returns String Rank
@@ -79,6 +86,48 @@ class Card
 
     else
       this._suitCharacter = '♦';
+  }
+
+  rankCharacterAssign (CardRank rank)
+  {
+    if (rank == CardRank.Ace)
+      this._rankCharacter = 'A';
+
+    else if (rank == CardRank.Two)
+      this._rankCharacter = '2';
+
+    else if (rank == CardRank.Three)
+      this._rankCharacter = '3';
+
+    else if (rank == CardRank.Four)
+      this._rankCharacter = '4';
+
+    else if (rank == CardRank.Five)
+      this._rankCharacter = '5';
+
+    else if (rank == CardRank.Six)
+      this._rankCharacter = '6';
+
+    else if (rank == CardRank.Seven)
+      this._rankCharacter = '7';
+
+    else if (rank == CardRank.Eight)
+      this._rankCharacter = '8';
+
+    else if (rank == CardRank.Nine)
+      this._rankCharacter = '9';
+
+    else if (rank == CardRank.Ten)
+      this._rankCharacter = '10';
+
+    else if (rank == CardRank.Jack)
+      this._rankCharacter = 'J';
+
+    else if (rank == CardRank.Queen)
+      this._rankCharacter = 'Q';
+
+    else if (rank == CardRank.King)
+      this._rankCharacter = 'K';
   }
 
   // Compares Cards based on index value;
