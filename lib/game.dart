@@ -27,14 +27,16 @@ class GamePageState extends State<GamePage> {
   var river;
   var playerCards;
   var opponentCards;
-  var commCard1Color = Colors.white;
-  var commCard2Color = Colors.white;
-  var commCard3Color = Colors.white;
-  var commCard4Color = Colors.white;
-  var commCard5Color = Colors.white;
+  var commCard1Opacity = 0.0;
+  var commCard2Opacity = 0.0;
+  var commCard3Opacity = 0.0;
+  var commCard4Opacity = 0.0;
+  var commCard5Opacity = 0.0;
 
   initCards(){
-    dealCards();
+    if(deck == null){
+      dealCards();
+    }
   }
 
   dealCards(){
@@ -119,15 +121,15 @@ class GamePageState extends State<GamePage> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            playingCardWidget(flop[0], commCard1Color),
+            playingCardWidget(flop[0], commCard1Opacity),
             SizedBox(width: 20),
-            playingCardWidget(flop[1], commCard2Color),
+            playingCardWidget(flop[1], commCard2Opacity),
             SizedBox(width: 20),
-            playingCardWidget(flop[2], commCard3Color),
+            playingCardWidget(flop[2], commCard3Opacity),
             SizedBox(width: 20),
-            playingCardWidget(turn, commCard4Color),
+            playingCardWidget(turn, commCard4Opacity),
             SizedBox(width: 20),
-            playingCardWidget(river, commCard5Color),
+            playingCardWidget(river, commCard5Opacity),
           ],
         )
     );
@@ -138,15 +140,17 @@ class GamePageState extends State<GamePage> {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            playingCardWidget(cards[0], Colors.black),
+            playingCardWidget(cards[0], 1.0),
             SizedBox(width: 20),
-            playingCardWidget(cards[1], Colors.black),
+            playingCardWidget(cards[1], 1.0),
           ],
         )
     );
   }
 
-  Widget playingCardWidget(c.Card card, color){
+  Widget playingCardWidget(c.Card card, double opacity){
+    print(card.toString());
+    print(card.getRankCharacter());
     return Container(
 
         decoration: BoxDecoration(
@@ -156,14 +160,19 @@ class GamePageState extends State<GamePage> {
         ),
         child: Column(
             children: <Widget>[
-              Text(
-                card.getRankString(),
-                style: TextStyle(color: color),
+              Opacity(
+                opacity: opacity,
+                child: Text(
+                  card.getRankCharacter().toString(),
+                ),
               ),
-              Text(
-                  card.getSuitString(),
-                  style: TextStyle(color: color),
-              ),
+              Opacity(
+                opacity: opacity,
+                child: Text(
+                  card.getSuitCharacter(),
+                ),
+              )
+
             ]
         )
     );
@@ -178,9 +187,9 @@ class GamePageState extends State<GamePage> {
               textColor: Colors.white,
               onPressed: (){
                 setState((){
-                  commCard1Color = Colors.black;
-                  commCard2Color = Colors.black;
-                  commCard3Color = Colors.black;
+                  commCard1Opacity = 1.0;
+                  commCard2Opacity = 1.0;
+                  commCard3Opacity = 1.0;
                 });
               },
               child: Text("Show Flop")
@@ -191,7 +200,7 @@ class GamePageState extends State<GamePage> {
               textColor: Colors.white,
               onPressed: (){
                 setState((){
-                  commCard4Color = Colors.black;
+                  commCard4Opacity = 1.0;
                 });
               },
               child: Text("Show Turn")
@@ -202,7 +211,7 @@ class GamePageState extends State<GamePage> {
               textColor: Colors.white,
               onPressed: (){
                 setState((){
-                  commCard5Color = Colors.black;
+                  commCard5Opacity = 1.0;
                 });
               },
               child: Text("Show River")
