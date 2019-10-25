@@ -16,6 +16,10 @@ class Game extends StatelessWidget {
 class PlayingCard{
   String suite = '';
   String value = '';
+  PlayingCard(value, suite){
+    this.value = value;
+    this.suite = suite;
+  }
 }
 
 class GamePage extends StatefulWidget {
@@ -30,11 +34,11 @@ class GamePageState extends State<GamePage> {
   var river;
   var playerCards;
   var opponentCards;
-  var commCard1 = '?';
-  var commCard2 = '?';
-  var commCard3 = '?';
-  var commCard4 = '?';
-  var commCard5 = '?';
+  var commCard1Color = Colors.white;
+  var commCard2Color = Colors.white;
+  var commCard3Color = Colors.white;
+  var commCard4Color = Colors.white;
+  var commCard5Color = Colors.white;
 
   initCards(){
     deck = [2,3,4,5,6,7,8,9,10,11,12,13,14];
@@ -42,11 +46,11 @@ class GamePageState extends State<GamePage> {
   }
 
   dealCards(){
-    playerCards = [3,4];
-    opponentCards = [10,11];
-    flop = [7,8,9];
-    turn = 5;
-    river = 6;
+    playerCards = [PlayingCard('3', 'Heart'), PlayingCard('4', 'Heart')];
+    opponentCards = [PlayingCard('10', 'Spade'), PlayingCard('J', 'Spade')];
+    flop = [PlayingCard('7', 'Heart'), PlayingCard('8', 'Spade'), PlayingCard('9', 'Spade')];
+    turn = PlayingCard('5', 'Heart');
+    river = PlayingCard('6', 'Heart');
   }
 
   @override
@@ -74,7 +78,6 @@ class GamePageState extends State<GamePage> {
           ),
         )
       ),
-
     );
   }
 
@@ -83,6 +86,7 @@ class GamePageState extends State<GamePage> {
       children: <Widget>[
         Text(
           'Opponents Cards',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
         ),
         cardHandWidget(opponentCards)
       ]
@@ -94,10 +98,9 @@ class GamePageState extends State<GamePage> {
         children: <Widget>[
           Text(
             'Community Cards',
+              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
           ),
-          Text(
-              '[$commCard1] [$commCard2] [$commCard3] [$commCard4] [$commCard5]'
-          ),
+          communityCardsWidget(flop, turn, river)
         ]
     );
   }
@@ -107,6 +110,7 @@ class GamePageState extends State<GamePage> {
         children: <Widget>[
           Text(
             'My Cards',
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
           ),
           Container(
               alignment: Alignment.center,
@@ -116,20 +120,39 @@ class GamePageState extends State<GamePage> {
     );
   }
 
-  Widget cardHandWidget(cards){
+  Widget communityCardsWidget(flop, turn, river){
     return Container(
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            playingCardWidget(cards[0].toString(), "Heart"),
+            playingCardWidget(flop[0], commCard1Color),
             SizedBox(width: 20),
-            playingCardWidget(cards[1].toString(), "Heart"),
+            playingCardWidget(flop[1], commCard2Color),
+            SizedBox(width: 20),
+            playingCardWidget(flop[2], commCard3Color),
+            SizedBox(width: 20),
+            playingCardWidget(turn, commCard4Color),
+            SizedBox(width: 20),
+            playingCardWidget(river, commCard5Color),
           ],
         )
     );
   }
 
-  Widget playingCardWidget(value, suite){
+  Widget cardHandWidget(cards){
+    return Container(
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            playingCardWidget(cards[0], Colors.black),
+            SizedBox(width: 20),
+            playingCardWidget(cards[1], Colors.black),
+          ],
+        )
+    );
+  }
+
+  Widget playingCardWidget(card, color){
     return Container(
 
         decoration: BoxDecoration(
@@ -140,10 +163,12 @@ class GamePageState extends State<GamePage> {
         child: Column(
             children: <Widget>[
               Text(
-                value,
+                card.value,
+                style: TextStyle(color: color),
               ),
               Text(
-                  suite
+                  card.suite,
+                  style: TextStyle(color: color),
               ),
             ]
         )
@@ -159,9 +184,9 @@ class GamePageState extends State<GamePage> {
               textColor: Colors.white,
               onPressed: (){
                 setState((){
-                  commCard1 = flop[0].toString();
-                  commCard2 = flop[1].toString();
-                  commCard3 = flop[2].toString();
+                  commCard1Color = Colors.black;
+                  commCard2Color = Colors.black;
+                  commCard3Color = Colors.black;
                 });
               },
               child: Text("Show Flop")
@@ -172,7 +197,7 @@ class GamePageState extends State<GamePage> {
               textColor: Colors.white,
               onPressed: (){
                 setState((){
-                  commCard4 = turn.toString();
+                  commCard4Color = Colors.black;
                 });
               },
               child: Text("Show Turn")
@@ -183,7 +208,7 @@ class GamePageState extends State<GamePage> {
               textColor: Colors.white,
               onPressed: (){
                 setState((){
-                  commCard5 = river.toString();
+                  commCard5Color = Colors.black;
                 });
               },
               child: Text("Show River")
