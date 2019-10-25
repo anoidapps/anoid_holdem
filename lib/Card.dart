@@ -126,7 +126,7 @@ class Card
     else if (rank == CardRank.Queen)
       this._rankCharacter = 'Q';
 
-    else if (rank == CardRank.King)
+    else
       this._rankCharacter = 'K';
   }
 
