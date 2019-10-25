@@ -5,6 +5,8 @@ class Card
 {
   var _suit;
   var _rank;
+  var _suitCharacter;
+
   String _name;
   bool _visible = false;
 
@@ -12,12 +14,20 @@ class Card
   {
     this._suit = suit;
     this._rank = rank;
+
+    suitCharacterAssign (_suit);
   }
 
   // Returns Enum of Suit
   getSuit ()
   {
     return this._suit;
+  }
+
+  // Returns the suit character
+  getSuitCharacter ()
+  {
+    return this._suitCharacter;
   }
 
   // Returns String of Suit
@@ -56,6 +66,21 @@ class Card
     return this._visible;
   }
 
+  suitCharacterAssign (CardSuit suit)
+  {
+    if (suit == CardSuit.Spades)
+      this._suitCharacter = '♠';
+
+    else if (suit == CardSuit.Clubs)
+      this._suitCharacter = '♣';
+
+    else if (suit == CardSuit.Hearts)
+      this._suitCharacter = '♥';
+
+    else
+      this._suitCharacter = '♦';
+  }
+
   // Compares Cards based on index value;
   compare (Card card)
   {
@@ -76,7 +101,7 @@ class Card
     String nameSuit = describeEnum(this._suit);
 
 
-    this._name = nameRank + " of " + nameSuit;
+    this._name = nameRank + " of " + nameSuit + ' ' + this._suitCharacter;
     return this._name;
   }
 
