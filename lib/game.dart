@@ -32,10 +32,15 @@ class GamePageState extends State<GamePage> {
   var commCard3Opacity = 0.0;
   var commCard4Opacity = 0.0;
   var commCard5Opacity = 0.0;
+  var potMoney = 0;
+  var playerMoney = 1000;
+  var opponentMoney = 1000;
+  var newRound = true;
 
   initCards(){
-    if(deck == null){
+    if(newRound){
       dealCards();
+      newRound = false;
     }
   }
 
@@ -149,29 +154,24 @@ class GamePageState extends State<GamePage> {
   }
 
   Widget playingCardWidget(c.Card card, double opacity){
-    return Container(
-
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.black),
-            borderRadius: BorderRadius.circular(5.0)
-        ),
-        child: Column(
-            children: <Widget>[
-              Opacity(
-                opacity: opacity,
-                child: Text(
-                  card.getRankCharacter().toString(),
-                ),
-              ),
-              Opacity(
-                opacity: opacity,
-                child: Text(
-                  card.getSuitCharacter(),
-                ),
-              )
-
-            ]
+    return Opacity(
+        opacity: opacity,
+        child: Container(
+            decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(5.0)
+            ),
+            child: Column(
+                children: <Widget>[
+                  Text(
+                    card.getRankCharacter().toString(),
+                  ),
+                  Text(
+                    card.getSuitCharacter(),
+                  ),
+                ]
+            )
         )
     );
   }
