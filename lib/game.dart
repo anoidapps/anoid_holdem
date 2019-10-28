@@ -27,11 +27,6 @@ class GamePageState extends State<GamePage> {
   var river;
   var playerCards;
   var opponentCards;
-  var commCard1Opacity = 0.0;
-  var commCard2Opacity = 0.0;
-  var commCard3Opacity = 0.0;
-  var commCard4Opacity = 0.0;
-  var commCard5Opacity = 0.0;
   var potMoney = 0;
   var playerMoney = 1000;
   var opponentMoney = 1000;
@@ -39,19 +34,48 @@ class GamePageState extends State<GamePage> {
 
   initCards(){
     if(newRound){
+      deck = new Deck();
+      deck.shuffle();
       dealCards();
       newRound = false;
     }
   }
 
   dealCards(){
-    deck = new Deck();
-    deck.shuffle();
-    playerCards = [deck.deal(), deck.deal()];
+    c.Card card1 = deck.deal();
+    c.Card card2 = deck.deal();
+    card1.show();
+    card2.show();
+    playerCards = [card1, card2];
     opponentCards = [deck.deal(), deck.deal()];
-    flop = [deck.deal(), deck.deal(), deck.deal()];
-    turn = deck.deal();
-    river = deck.deal();
+  }
+
+  dealFlop(){
+    c.Card card1 = deck.deal();
+    c.Card card2 = deck.deal();
+    c.Card card3 = deck.deal();
+    card1.show();
+    card2.show();
+    card3.show();
+    return [card1, card2, card3];
+  }
+
+  dealTurn(){
+    c.Card card = deck.deal();
+    card.show();
+    return card;
+  }
+
+  dealRiver(){
+    c.Card card = deck.deal();
+    card.show();
+    showOpponentHand(); //move this later to after betting round
+    return card;
+  }
+
+  showOpponentHand(){
+    opponentCards[0].show();
+    opponentCards[1].show();
   }
 
   @override
@@ -122,46 +146,58 @@ class GamePageState extends State<GamePage> {
   }
 
   Widget communityCardsWidget(flop, turn, river){
+    var content = <Widget>[];
+    if(flop != null){
+      content.add(cardWidget(flop[0]));
+      content.add(SizedBox(width: 20));
+      content.add(cardWidget(flop[1]));
+      content.add(SizedBox(width: 20));
+      content.add(cardWidget(flop[2]));
+    }
+    if(turn != null){
+      content.add(SizedBox(width: 20));
+      content.add(cardWidget(turn));
+    }
+    if(river != null){
+      content.add(SizedBox(width: 20));
+      content.add(cardWidget(river));
+    }
     return Container(
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            playingCardWidget(flop[0], commCard1Opacity),
-            SizedBox(width: 20),
-            playingCardWidget(flop[1], commCard2Opacity),
-            SizedBox(width: 20),
-            playingCardWidget(flop[2], commCard3Opacity),
-            SizedBox(width: 20),
-            playingCardWidget(turn, commCard4Opacity),
-            SizedBox(width: 20),
-            playingCardWidget(river, commCard5Opacity),
-          ],
+          children: content
         )
     );
   }
 
   Widget cardHandWidget(cards){
+    var content = <Widget>[];
+    if(cards != null){
+      content.add(cardWidget(cards[0]));
+      content.add(SizedBox(width: 20));
+      content.add(cardWidget(cards[1]));
+    }
     return Container(
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            playingCardWidget(cards[0], 1.0),
-            SizedBox(width: 20),
-            playingCardWidget(cards[1], 1.0),
-          ],
+          children: content
         )
     );
   }
 
-  Widget playingCardWidget(c.Card card, double opacity){
-    return Opacity(
-        opacity: opacity,
-        child: Container(
-            decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(5.0)
-            ),
+  Widget cardWidget(c.Card card){
+    var opacity = 0.0;
+    if(card.getVisible()){
+      opacity = 1.0;
+    }
+    return Container(
+        decoration: BoxDecoration(
+            color: Colors.white,
+            border: Border.all(color: Colors.black),
+            borderRadius: BorderRadius.circular(5.0)
+        ),
+        child: Opacity(
+            opacity: opacity,
             child: Column(
                 children: <Widget>[
                   Text(
@@ -184,10 +220,9 @@ class GamePageState extends State<GamePage> {
               color: Colors.blue,
               textColor: Colors.white,
               onPressed: (){
+                var cards = dealFlop();
                 setState((){
-                  commCard1Opacity = 1.0;
-                  commCard2Opacity = 1.0;
-                  commCard3Opacity = 1.0;
+                  flop = cards;
                 });
               },
               child: Text("Show Flop")
@@ -197,8 +232,9 @@ class GamePageState extends State<GamePage> {
               color: Colors.blue,
               textColor: Colors.white,
               onPressed: (){
+                var card = dealTurn();
                 setState((){
-                  commCard4Opacity = 1.0;
+                  turn = card;
                 });
               },
               child: Text("Show Turn")
@@ -208,8 +244,9 @@ class GamePageState extends State<GamePage> {
               color: Colors.blue,
               textColor: Colors.white,
               onPressed: (){
+                var card = dealRiver();
                 setState((){
-                  commCard5Opacity = 1.0;
+                  river = card;
                 });
               },
               child: Text("Show River")
