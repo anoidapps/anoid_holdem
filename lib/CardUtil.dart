@@ -247,12 +247,12 @@ class CardUtil
     int isFlush = -1;
     hand.sort();
 
-    if (hand.get(0).getSuit().getSuit() == hand.get(1).getSuit().getSuit()
-        && hand.get(1).getSuit().getSuit() == hand.get(2).getSuit().getSuit()
-        && hand.get(2).getSuit().getSuit() == hand.get(3).getSuit().getSuit()
-        && hand.get(3).getSuit().getSuit() == hand.get(4).getSuit().getSuit())
+    if (hand.get(0).getSuit() == hand.get(1).getSuit()
+        && hand.get(1).getSuit() == hand.get(2).getSuit()
+        && hand.get(2).getSuit() == hand.get(3).getSuit()
+        && hand.get(3).getSuit() == hand.get(4).getSuit())
     {
-      isFlush = hand.get(0).getSuit().getSuit();
+      isFlush = hand.get(0).getSuit();
     }
 
     return isFlush;
