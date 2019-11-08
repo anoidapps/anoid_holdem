@@ -1,7 +1,8 @@
 import 'CardSuit.dart';
 import 'CardRank.dart';
+import 'RankCompartor.dart';
 
-class Card
+class Card implements Comparable <Card>
 {
   var _suit;
   var _rank;
@@ -162,6 +163,12 @@ class Card
     final int indexOfDot = description.indexOf('.');
     assert(indexOfDot != -1 && indexOfDot < description.length - 1);
     return description.substring(indexOfDot + 1);
+  }
+
+  @override
+  int compareTo (Card card)
+  {
+    return RankComparator.compare(this, card);
   }
 
 }

@@ -1,4 +1,5 @@
 import 'Card.dart';
+import 'RankCompartor.dart';
 
 class Hand
 {
@@ -12,8 +13,31 @@ class Hand
     this._hand.add(card);
   }
 
+  addFront (Card card)
+  {
+    List<Card> tempHand = new List();
+    tempHand.add(card);
+
+    while (this._hand.isNotEmpty)
+    {
+      tempHand.add(this._hand.removeAt(0));
+    }
+
+    while (tempHand.isNotEmpty)
+    {
+      this.add(tempHand.removeAt(0));
+    }
+  }
+
   // Used to remove a specific Card;
-  remove (Card card)
+  remove (int i)
+  {
+    Card tempCard = this._hand.removeAt(i);
+    return tempCard;
+  }
+
+  // Used to remove a specific Card;
+  removeCard (Card card)
   {
     Card tempCard = card;
     this._hand.remove(card);
@@ -25,6 +49,13 @@ class Hand
   size ()
   {
     return this._hand.length;
+  }
+
+  // Returns the card specified, without removing it;
+  // This is done by index;
+  get (int i)
+  {
+    return this._hand[i];
   }
 
   // Returns the card specified, without removing it;
@@ -41,4 +72,9 @@ class Hand
     return (this._hand.indexOf(card));
   }
 
+  sort ()
+  {
+    Comparator<Card> cardComparator = (card1, card2) => card1.compare(card2);
+    this._hand.sort(cardComparator);
+  }
 }
