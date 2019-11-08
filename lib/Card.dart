@@ -45,6 +45,51 @@ class Card implements Comparable <Card>
     return this._rank;
   }
 
+  getValue ()
+  {
+    int value = 0;
+
+    if (this.getRank() == CardRank.Ace)
+      value = 1;
+
+    else if (this.getRank() == CardRank.Two)
+      value = 2;
+
+    else if (this.getRank() == CardRank.Three)
+      value = 3;
+
+    else if (this.getRank() == CardRank.Four)
+      value = 4;
+
+    else if (this.getRank() == CardRank.Five)
+      value = 5;
+
+    else if (this.getRank() == CardRank.Six)
+      value = 6;
+
+    else if (this.getRank() == CardRank.Seven)
+      value = 7;
+
+    else if (this.getRank() == CardRank.Eight)
+      value = 8;
+
+    else if (this.getRank() == CardRank.Nine)
+      value = 9;
+
+    else if (this.getRank() == CardRank.Ten)
+      value = 10;
+
+    else if (this.getRank() == CardRank.Jack)
+      value = 11;
+
+    else if (this.getRank() == CardRank.Queen)
+      value = 12;
+
+    else
+      value = 13;
+    return value;
+  }
+
   getRankCharacter ()
   {
     return this._rankCharacter;

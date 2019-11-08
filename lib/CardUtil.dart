@@ -67,7 +67,7 @@ class CardUtil
     else
     {
       hand.sort();
-      score = 200 + hand.get(4).getValue().getValue();
+      score = 200 + hand.get(4).getValue();
     }
 
     return score;
@@ -83,26 +83,26 @@ class CardUtil
     var pair = -1;
     hand.sort();
 
-    if (hand.get(0).getValue().getValue() == hand.get(1).getValue().getValue())
+    if (hand.get(0).getValue() == hand.get(1).getValue())
     {
-      pair = hand.get(0).getValue().getValue();
+      pair = hand.get(0).getValue();
     }
 
     else if (hand.size() == 5)
     {
-      if (hand.get(1).getValue().getValue() == hand.get(2).getValue().getValue())
+      if (hand.get(1).getValue() == hand.get(2).getValue())
       {
-        pair = hand.get(1).getValue().getValue();
+        pair = hand.get(1).getValue();
       }
 
-      else if (hand.get(2).getValue().getValue() == hand.get(3).getValue().getValue())
+      else if (hand.get(2).getValue() == hand.get(3).getValue())
       {
-        pair = hand.get(2).getValue().getValue();
+        pair = hand.get(2).getValue();
       }
 
-      else if (hand.get(3).getValue().getValue() == hand.get(4).getValue().getValue())
+      else if (hand.get(3).getValue() == hand.get(4).getValue())
       {
-        pair = hand.get(3).getValue().getValue();
+        pair = hand.get(3).getValue();
       }
     }
 
@@ -143,7 +143,7 @@ class CardUtil
 
     if (i > 0)
     {
-      if (tempHand.get(0).getValue().getValue() == tempHand.get(1).getValue().getValue())
+      if (tempHand.get(0).getValue() == tempHand.get(1).getValue())
       {
         for (int k = 1; k > -1; k--)
         {
@@ -151,7 +151,7 @@ class CardUtil
         }
       }
 
-      else if (tempHand.get(1).getValue().getValue() == tempHand.get(2).getValue().getValue())
+      else if (tempHand.get(1).getValue() == tempHand.get(2).getValue())
       {
         for (int k = 2; k > 0; k--)
         {
@@ -159,7 +159,7 @@ class CardUtil
         }
       }
 
-      else if (tempHand.get(2).getValue().getValue() == tempHand.get(3).getValue().getValue())
+      else if (tempHand.get(2).getValue() == tempHand.get(3).getValue())
       {
         for (int k = 3; k > 1; k--)
         {
@@ -167,7 +167,7 @@ class CardUtil
         }
       }
 
-      else if (tempHand.get(3).getValue().getValue() == tempHand.get(4).getValue().getValue())
+      else if (tempHand.get(3).getValue() == tempHand.get(4).getValue())
       {
         for (int k = 4; k > 2; k--)
         {
@@ -198,19 +198,19 @@ class CardUtil
     int isThreeKind = -1;
     hand.sort();
 
-    if (hand.get(0).getValue().getValue() == hand.get(1).getValue().getValue() && hand.get(1).getValue().getValue() == hand.get(2).getValue().getValue())
+    if (hand.get(0).getValue() == hand.get(1).getValue() && hand.get(1).getValue() == hand.get(2).getValue())
     {
-      isThreeKind = hand.get(0).getValue().getValue();
+      isThreeKind = hand.get(0).getValue();
     }
 
-    else if (hand.get(1).getValue().getValue() == hand.get(2).getValue().getValue() && hand.get(2).getValue().getValue() == hand.get(3).getValue().getValue())
+    else if (hand.get(1).getValue() == hand.get(2).getValue() && hand.get(2).getValue() == hand.get(3).getValue())
     {
-      isThreeKind = hand.get(1).getValue().getValue();
+      isThreeKind = hand.get(1).getValue();
     }
 
-    else if (hand.get(2).getValue().getValue() == hand.get(3).getValue().getValue() && hand.get(3).getValue().getValue() == hand.get(4).getValue().getValue())
+    else if (hand.get(2).getValue() == hand.get(3).getValue() && hand.get(3).getValue() == hand.get(4).getValue())
     {
-      isThreeKind = hand.get(2).getValue().getValue();
+      isThreeKind = hand.get(2).getValue();
     }
 
     return isThreeKind;
@@ -226,12 +226,12 @@ class CardUtil
     int isStraight = -1;
     hand.sort();
 
-    if (hand.get(0).getValue().getValue() == (hand.get(1).getValue().getValue() - 1)
-        && hand.get(1).getValue().getValue() == (hand.get(2).getValue().getValue() - 1)
-        && hand.get(2).getValue().getValue() == (hand.get(3).getValue().getValue() - 1)
-        && hand.get(3).getValue().getValue() == (hand.get(4).getValue().getValue() - 1))
+    if (hand.get(0).getValue() == (hand.get(1).getValue() - 1)
+        && hand.get(1).getValue() == (hand.get(2).getValue() - 1)
+        && hand.get(2).getValue() == (hand.get(3).getValue() - 1)
+        && hand.get(3).getValue() == (hand.get(4).getValue() - 1))
     {
-      isStraight = hand.get(4).getValue().getValue();
+      isStraight = hand.get(4).getValue();
     }
 
     return isStraight;
@@ -292,21 +292,21 @@ class CardUtil
     if (i > 0)
     {
       tempHand.sort();
-      if (tempHand.get(0).getValue().getValue() == tempHand.get(2).getValue().getValue())
+      if (tempHand.get(0).getValue() == tempHand.get(2).getValue())
       {
         for (int k = 2; k > -1; k--)
         {
           tempHand.remove(k);
         }
       }
-      else if (tempHand.get(1).getValue().getValue() == tempHand.get(3).getValue().getValue())
+      else if (tempHand.get(1).getValue() == tempHand.get(3).getValue())
       {
         for (int k = 3; k > 0; k--)
         {
           tempHand.remove(k);
         }
       }
-      else if (tempHand.get(2).getValue().getValue() == tempHand.get(4).getValue().getValue())
+      else if (tempHand.get(2).getValue() == tempHand.get(4).getValue())
       {
         for (int k = 4; k > 1; k--)
         {
@@ -337,18 +337,18 @@ class CardUtil
     // Collections.sort(hand, new ValueComparator());
     hand.sort();
 
-    if (hand.get(0).getValue().getValue() == hand.get(1).getValue().getValue()
-        && hand.get(1).getValue().getValue() == hand.get(2).getValue().getValue()
-        && hand.get(2).getValue().getValue() == hand.get(3).getValue().getValue())
+    if (hand.get(0).getValue() == hand.get(1).getValue()
+        && hand.get(1).getValue() == hand.get(2).getValue()
+        && hand.get(2).getValue() == hand.get(3).getValue())
     {
-      isFourKind = hand.get(0).getValue().getValue();
+      isFourKind = hand.get(0).getValue();
     }
 
-    else if (hand.get(1).getValue().getValue() == hand.get(2).getValue().getValue()
-        && hand.get(2).getValue().getValue() == hand.get(3).getValue().getValue()
-        && hand.get(3).getValue().getValue() == hand.get(4).getValue().getValue())
+    else if (hand.get(1).getValue() == hand.get(2).getValue()
+        && hand.get(2).getValue() == hand.get(3).getValue()
+        && hand.get(3).getValue() == hand.get(4).getValue())
     {
-      isFourKind = hand.get(1).getValue().getValue();
+      isFourKind = hand.get(1).getValue();
     }
 
     return isFourKind;
