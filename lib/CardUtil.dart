@@ -123,12 +123,14 @@ class CardUtil
     while (i <= hand.size())
     {
       tempHand.add(hand.get(i));
+      i++;
     }
 
     i = 0;
     while (i <= tempHand.size())
     {
       hand.add(tempHand.get(i));
+      i++;
     }
 
     List<int> isTwoPair = new List(2);
@@ -271,12 +273,14 @@ class CardUtil
     while (i <= hand.size())
     {
       tempHand.add(hand.get(i));
+      i++;
     }
 
     i = 0;
     while (i <= tempHand.size())
     {
       hand.add(tempHand.get(i));
+      i++;
     }
 
     List<int> isFullHouse = new List (2);
