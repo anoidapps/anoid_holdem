@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'main.dart';
+import 'CardUtil.dart';
 import 'Deck.dart';
 import 'Card.dart' as c;
 
@@ -585,10 +586,12 @@ class GamePageState extends State<GamePage> {
   }
 
   computeRoundResult(){
-    var p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2], turn, river];
-    var p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
-    var playerScore = 10; //TODO: compute player hand score
-    var opponentScore = 1; //TODO: compute opponent hand score
+    List<c.Card> p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2], turn, river];
+    List<c.Card> p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
+    var playerScore = CardUtil.scoreHand(p1Hand);
+    var opponentScore = CardUtil.scoreHand(p2Hand);
+    print('playerScore = ' + playerScore);
+    print('opponentScore = ' + opponentScore);
     winner = playerScore > opponentScore? true: false;
     if(winner){
       playerMoney = playerMoney + potMoney;
