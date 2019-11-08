@@ -39,6 +39,8 @@ class GamePageState extends State<GamePage> {
   var showCheckRaiseFoldButtons = false;
   var showRoundResult = false;
   var winner = false;
+  var chatMessage = '';
+  var showChatMessage = false;
 
   initCards(){
     if(newRound){
@@ -57,6 +59,7 @@ class GamePageState extends State<GamePage> {
       river = null;
       playerCards = null;
       opponentCards = null;
+      showChatMessage = false;
     }
   }
 
@@ -111,24 +114,61 @@ class GamePageState extends State<GamePage> {
         title: Text("Poker Table"),
       ),
       body: Center(
-        child: Container(
-          color: Colors.green,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              opponentsCardsWidget(),
-              SizedBox(height: 50),
-              buildMoneyPot(potMoney),
-              SizedBox(height: 30),
-              buildCommunityCards(),
-              SizedBox(height: 50),
-              playerCardsWidget(),
-              SizedBox(height: 50),
-              actionButtonWidget(),
-              showRoundResult? roundResultWidget(): SizedBox(width: 0)
-            ],
-          ),
+        child: Stack(
+          children: <Widget>[
+            Container(
+              color: Colors.green,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  opponentsCardsWidget(),
+                  SizedBox(height: 50),
+                  buildMoneyPot(potMoney),
+                  SizedBox(height: 30),
+                  buildCommunityCards(),
+                  SizedBox(height: 50),
+                  playerCardsWidget(),
+                  SizedBox(height: 50),
+                  actionButtonWidget(),
+                  showRoundResult? roundResultWidget(): SizedBox(width: 0)
+                ],
+              ),
+            ),
+            Container(
+              //this is the overlay container
+              child: chatBubble(chatMessage),
+            )
+          ],
         )
+      ),
+    );
+  }
+
+  Widget chatBubble(msg){
+    var content = <Widget>[];
+    if(showChatMessage){
+      content = <Widget>[
+        SizedBox(height:100),
+        Container(
+            child: Row(
+              children: <Widget>[
+                SizedBox(width: 80),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.black),
+                      borderRadius: BorderRadius.circular(5.0)
+                  ),
+                  child: Text(' ' + chatMessage + ' '),
+                )
+              ],
+            )
+        )
+      ];
+    }
+    return Container(
+      child: Column(
+          children: content
       ),
     );
   }
@@ -356,7 +396,12 @@ class GamePageState extends State<GamePage> {
           playerMoney = playerMoney - 10;
           potMoney = potMoney + 10;
           currentWager = 10;
-          doOpponentTurn();
+          hideButtons();
+          Future.delayed(const Duration(milliseconds: 2000), () {
+            doOpponentTurn();
+            setState(() {
+            });
+          });
           setState((){
           });
         },
@@ -371,7 +416,11 @@ class GamePageState extends State<GamePage> {
         onPressed: (){
           var newMoney = playerMoney - currentWager;
           potMoney = potMoney + currentWager;
-          doOpponentTurn();
+          Future.delayed(const Duration(milliseconds: 2000), () {
+            doOpponentTurn();
+            setState(() {
+            });
+          });
           setState((){
             playerMoney = newMoney;
             potMoney = potMoney;
@@ -386,7 +435,12 @@ class GamePageState extends State<GamePage> {
         color: Colors.blue,
         textColor: Colors.white,
         onPressed: (){
-          doOpponentTurn();
+          hideButtons();
+          Future.delayed(const Duration(milliseconds: 2000), () {
+            doOpponentTurn();
+            setState(() {
+            });
+          });
           setState((){
           });
         },
@@ -436,6 +490,13 @@ class GamePageState extends State<GamePage> {
   }
 
   doOpponentCheck(){
+    showChatMessage = true;
+    chatMessage = "Check";
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      showChatMessage = false;
+      setState(() {
+      });
+    });
     if(river != null){
       currentWager = 0;
       showAnteQuitButtons = false;
@@ -469,6 +530,13 @@ class GamePageState extends State<GamePage> {
   }
 
   doOpponentCall(){
+    showChatMessage = true;
+    chatMessage = "Call";
+    Future.delayed(const Duration(milliseconds: 2000), () {
+      showChatMessage = false;
+      setState(() {
+      });
+    });
     if(river != null){
       potMoney = potMoney + currentWager;
       opponentMoney = opponentMoney - currentWager;
@@ -509,7 +577,16 @@ class GamePageState extends State<GamePage> {
 
   }
 
+  hideButtons(){
+    showAnteQuitButtons = false;
+    showCallFoldButtons = false;
+    showBetCheckFoldButtons = false;
+    showCheckRaiseFoldButtons = false;
+  }
+
   computeRoundResult(){
+    var p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2], turn, river];
+    var p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
     var playerScore = 10; //TODO: compute player hand score
     var opponentScore = 1; //TODO: compute opponent hand score
     winner = playerScore > opponentScore? true: false;
