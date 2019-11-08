@@ -55,7 +55,7 @@ class CardUtil
     else if (isTwoPair(hand) [0] > 0 && isTwoPair(hand) [1] > 0)
     {
       int i = isTwoPair(hand) [0];
-      int j = isTwoPair(hand) [0];
+      int j = isTwoPair(hand) [1];
       score = 400 + i + j;
     }
 
@@ -82,6 +82,8 @@ class CardUtil
   {
     var pair = -1;
     hand.sort();
+
+    print("Line 86 " + hand.toString() + "\n");
 
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
@@ -127,11 +129,11 @@ class CardUtil
     }
 
     i = 0;
-    while (i < tempHand.size())
-    {
-      hand.add(tempHand.get(i));
-      i++;
-    }
+//    while (i < tempHand.size())
+//    {
+//      hand.add(tempHand.get(i));
+//      i++;
+//    }
 
     List<int> isTwoPair = new List(2);
 
@@ -276,12 +278,12 @@ class CardUtil
       i++;
     }
 
-    i = 0;
-    while (i < tempHand.size())
-    {
-      hand.add(tempHand.get(i));
-      i++;
-    }
+//    i = 0;
+//    while (i < tempHand.size())
+//    {
+//      hand.add(tempHand.get(i));
+//      i++;
+//    }
 
     List<int> isFullHouse = new List (2);
 

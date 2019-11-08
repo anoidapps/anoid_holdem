@@ -67,7 +67,7 @@ class Card implements Comparable <Card>
     int value = 0;
 
     if (this.getRank() == CardRank.Ace)
-      value = 1;
+      value = 14;
 
     else if (this.getRank() == CardRank.Two)
       value = 2;
