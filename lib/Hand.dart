@@ -77,4 +77,16 @@ class Hand
     Comparator<Card> cardComparator = (card1, card2) => card1.compare(card2);
     this._hand.sort(cardComparator);
   }
+
+  @override
+  String toString()
+  {
+    String handString = "";
+
+    for (int i = 0; i < this.size(); i++)
+      {
+        handString = handString + this.get(i).toString() + " : ";
+      }
+    return handString;
+  }
 }

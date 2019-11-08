@@ -586,8 +586,8 @@ class GamePageState extends State<GamePage> {
   }
 
   computeRoundResult(){
-    List<c.Card> p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2], turn, river];
-    List<c.Card> p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
+    List<c.Card> p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2]];
+    List<c.Card> p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2]];
     var playerScore = CardUtil.scoreHand(p1Hand);
     var opponentScore = CardUtil.scoreHand(p2Hand);
     print('playerScore = ' + playerScore.toString());
