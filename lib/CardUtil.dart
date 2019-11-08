@@ -120,14 +120,14 @@ class CardUtil
     hand.sort();
 
     int i = 0;
-    while (i <= hand.size())
+    while (i < hand.size())
     {
       tempHand.add(hand.get(i));
       i++;
     }
 
     i = 0;
-    while (i <= tempHand.size())
+    while (i < tempHand.size())
     {
       hand.add(tempHand.get(i));
       i++;
@@ -254,7 +254,7 @@ class CardUtil
         && hand.get(2).getSuit() == hand.get(3).getSuit()
         && hand.get(3).getSuit() == hand.get(4).getSuit())
     {
-      isFlush = hand.get(0).getSuit();
+      isFlush = hand.get(0).getSuitNumber();
     }
 
     return isFlush;
@@ -270,14 +270,14 @@ class CardUtil
     Hand tempHand = new Hand();
 
     int i = 0;
-    while (i <= hand.size())
+    while (i < hand.size())
     {
       tempHand.add(hand.get(i));
       i++;
     }
 
     i = 0;
-    while (i <= tempHand.size())
+    while (i < tempHand.size())
     {
       hand.add(tempHand.get(i));
       i++;

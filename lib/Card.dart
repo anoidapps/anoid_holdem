@@ -27,6 +27,23 @@ class Card implements Comparable <Card>
     return this._suit;
   }
 
+  getSuitNumber ()
+  {
+    if (this._suit == CardSuit.Diamonds)
+      return 1;
+
+    if (this._suit == CardSuit.Hearts)
+      return 2;
+
+    if (this._suit == CardSuit.Clubs)
+      return 3;
+
+    if (this._suit == CardSuit.Spades)
+      return 4;
+
+    return this._suit;
+  }
+
   // Returns the suit character
   getSuitCharacter ()
   {

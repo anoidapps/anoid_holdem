@@ -590,8 +590,8 @@ class GamePageState extends State<GamePage> {
     List<c.Card> p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
     var playerScore = CardUtil.scoreHand(p1Hand);
     var opponentScore = CardUtil.scoreHand(p2Hand);
-    print('playerScore = ' + playerScore);
-    print('opponentScore = ' + opponentScore);
+    print('playerScore = ' + playerScore.toString());
+    print('opponentScore = ' + opponentScore.toString());
     winner = playerScore > opponentScore? true: false;
     if(winner){
       playerMoney = playerMoney + potMoney;
