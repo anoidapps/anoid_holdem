@@ -87,24 +87,39 @@ class CardUtil
 
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
-      pair = hand.get(0).getValue();
+      pair = hand.get(7).getValue;
     }
 
-    else if (hand.size() == 5)
+    else if (hand.size() == 7)
     {
       if (hand.get(1).getValue() == hand.get(2).getValue())
       {
-        pair = hand.get(1).getValue();
+        pair = hand.get(7).getValue;
       }
 
       else if (hand.get(2).getValue() == hand.get(3).getValue())
       {
-        pair = hand.get(2).getValue();
+        pair = hand.get(7).getValue;
       }
 
       else if (hand.get(3).getValue() == hand.get(4).getValue())
       {
-        pair = hand.get(3).getValue();
+        pair = hand.get(7).getValue;
+      }
+
+      else if (hand.get(4).getValue() == hand.get(5).getValue())
+      {
+        pair = hand.get(7).getValue;
+      }
+
+      else if (hand.get(5).getValue() == hand.get(6).getValue())
+      {
+        pair = hand.get(7).getValue;
+      }
+
+      else if (hand.get(6).getValue() == hand.get(7).getValue())
+      {
+        pair = hand.get(7).getValue;
       }
     }
 

@@ -196,10 +196,10 @@ class Card implements Comparable <Card>
   // Compares Cards based on index value;
   compare (Card card)
   {
-    if (this._rank.index == card._rank.index)
+    if (this.getValue() == card.getValue())
       return 0;
 
-    else if (this._rank.index < card._rank.index)
+    else if (this.getValue() < card.getValue())
       return -1;
 
     else

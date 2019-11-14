@@ -3,9 +3,12 @@ import 'RankCompartor.dart';
 
 class Hand
 {
-  List<Card> _hand = new List();
+  List<Card> _hand;
 
-  Hand ();
+  Hand ()
+  {
+   this._hand = new List();
+  }
 
   // Used to add a card to the Deck;
   add (Card card)
