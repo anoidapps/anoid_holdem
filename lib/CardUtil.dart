@@ -243,6 +243,11 @@ class CardUtil
       isThreeKind = hand.get(2).getValue();
     }
 
+    else if (hand.get(3).getValue() == hand.get(4).getValue() && hand.get(5).getValue() == hand.get(6).getValue())
+    {
+      isThreeKind = hand.get(3).getValue();
+    }
+
     return isThreeKind;
   }
 
