@@ -270,6 +270,60 @@ class CardUtil
       isStraight = hand.get(4).getValue();
     }
 
+    else if (hand.get(1).getValue() == (hand.get(2).getValue() - 1)
+        && hand.get(2).getValue() == (hand.get(3).getValue() - 1)
+        && hand.get(3).getValue() == (hand.get(4).getValue() - 1)
+        && hand.get(4).getValue() == (hand.get(5).getValue() - 1))
+    {
+      isStraight = hand.get(5).getValue();
+    }
+
+    else if (hand.get(2).getValue() == (hand.get(3).getValue() - 1)
+        && hand.get(3).getValue() == (hand.get(4).getValue() - 1)
+        && hand.get(4).getValue() == (hand.get(5).getValue() - 1)
+        && hand.get(5).getValue() == (hand.get(6).getValue() - 1))
+    {
+      isStraight = hand.get(6).getValue();
+    }
+
+    else
+    {
+      if (hand.get(6).getValue() == 14)
+        {
+          Card tempCard6 = hand.get(6);
+          Card tempCard0 = hand.get(0);
+
+          hand.remove(6);
+          hand.remove(0);
+          hand.add(tempCard0);
+          hand.addFront(tempCard6);
+
+          if (hand.get(0).getValue() == (hand.get(1).getValue() - 1)
+              && hand.get(1).getValue() == (hand.get(2).getValue() - 1)
+              && hand.get(2).getValue() == (hand.get(3).getValue() - 1)
+              && hand.get(3).getValue() == (hand.get(4).getValue() - 1))
+          {
+            isStraight = hand.get(4).getValue();
+          }
+
+          else if (hand.get(1).getValue() == (hand.get(2).getValue() - 1)
+              && hand.get(2).getValue() == (hand.get(3).getValue() - 1)
+              && hand.get(3).getValue() == (hand.get(4).getValue() - 1)
+              && hand.get(4).getValue() == (hand.get(5).getValue() - 1))
+          {
+            isStraight = hand.get(5).getValue();
+          }
+
+          else if (hand.get(2).getValue() == (hand.get(3).getValue() - 1)
+              && hand.get(3).getValue() == (hand.get(4).getValue() - 1)
+              && hand.get(4).getValue() == (hand.get(5).getValue() - 1)
+              && hand.get(5).getValue() == (hand.get(6).getValue() - 1))
+          {
+            isStraight = hand.get(6).getValue();
+          }
+        }
+    }
+
     return isStraight;
   }
 
@@ -289,6 +343,22 @@ class CardUtil
         && hand.get(3).getSuit() == hand.get(4).getSuit())
     {
       isFlush = hand.get(0).getSuitNumber();
+    }
+
+    else if (hand.get(1).getSuit() == hand.get(2).getSuit()
+        && hand.get(2).getSuit() == hand.get(3).getSuit()
+        && hand.get(3).getSuit() == hand.get(4).getSuit()
+        && hand.get(4).getSuit() == hand.get(5).getSuit())
+    {
+      isFlush = hand.get(1).getSuitNumber();
+    }
+
+    else if (hand.get(2).getSuit() == hand.get(3).getSuit()
+        && hand.get(3).getSuit() == hand.get(4).getSuit()
+        && hand.get(4).getSuit() == hand.get(5).getSuit()
+        && hand.get(5).getSuit() == hand.get(6).getSuit())
+    {
+      isFlush = hand.get(2).getSuitNumber();
     }
 
     return isFlush;
@@ -351,6 +421,22 @@ class CardUtil
           tempHand.remove(k);
         }
       }
+
+      else if (tempHand.get(3).getValue() == tempHand.get(5).getValue())
+      {
+        for (int k = 5; k > 2; k--)
+        {
+          tempHand.remove(k);
+        }
+      }
+
+      else if (tempHand.get(4).getValue() == tempHand.get(6).getValue())
+      {
+        for (int k = 6; k > 3; k--)
+        {
+          tempHand.remove(k);
+        }
+      }
     }
 
     j = isPair(tempHand);
@@ -387,6 +473,20 @@ class CardUtil
         && hand.get(3).getValue() == hand.get(4).getValue())
     {
       isFourKind = hand.get(1).getValue();
+    }
+
+    else if (hand.get(2).getValue() == hand.get(3).getValue()
+        && hand.get(3).getValue() == hand.get(4).getValue()
+        && hand.get(4).getValue() == hand.get(5).getValue())
+    {
+      isFourKind = hand.get(2).getValue();
+    }
+
+    else if (hand.get(3).getValue() == hand.get(4).getValue()
+        && hand.get(4).getValue() == hand.get(5).getValue()
+        && hand.get(5).getValue() == hand.get(6).getValue())
+    {
+      isFourKind = hand.get(3).getValue();
     }
 
     return isFourKind;
