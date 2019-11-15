@@ -83,7 +83,7 @@ class CardUtil
     var pair = -1;
     hand.sort();
 
-    print("Line 86 " + hand.toString() + "\n");
+    // print("Line 86 " + hand.toString() + "\n");
 
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
@@ -184,6 +184,22 @@ class CardUtil
       else if (tempHand.get(3).getValue() == tempHand.get(4).getValue())
       {
         for (int k = 4; k > 2; k--)
+        {
+          tempHand.remove(k);
+        }
+      }
+
+      else if (tempHand.get(4).getValue() == tempHand.get(5).getValue())
+      {
+        for (int k = 5; k > 3; k--)
+        {
+          tempHand.remove(k);
+        }
+      }
+
+      else if (tempHand.get(5).getValue() == tempHand.get(6).getValue())
+      {
+        for (int k = 6; k > 4; k--)
         {
           tempHand.remove(k);
         }
