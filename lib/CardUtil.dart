@@ -73,6 +73,11 @@ class CardUtil
     return score;
   }
 
+  static isTie (Hand hand, Hand opHand)
+  {
+
+  }
+
   /*
    * Checks for pair.
    * @param hand
@@ -88,34 +93,34 @@ class CardUtil
 
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
-      pair = hand.get(6).getValue();
+      pair = hand.get(0).getValue();
     }
 
     else if (hand.size() == 7)
     {
       if (hand.get(1).getValue() == hand.get(2).getValue())
       {
-        pair = hand.get(6).getValue();
+        pair = pair + hand.get(1).getValue();
       }
 
       else if (hand.get(2).getValue() == hand.get(3).getValue())
       {
-        pair = hand.get(6).getValue();
+        pair = pair + hand.get(2).getValue();
       }
 
       else if (hand.get(3).getValue() == hand.get(4).getValue())
       {
-        pair = hand.get(6).getValue();
+        pair = pair + hand.get(3).getValue();
       }
 
       else if (hand.get(4).getValue() == hand.get(5).getValue())
       {
-        pair = hand.get(6).getValue();
+        pair = pair + hand.get(4).getValue();
       }
 
       else if (hand.get(5).getValue() == hand.get(6).getValue())
       {
-        pair = hand.get(6).getValue();
+        pair = pair + hand.get(5).getValue();
       }
     }
 
