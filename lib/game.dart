@@ -390,22 +390,30 @@ class GamePageState extends State<GamePage> {
   }
 
   Widget betButton(){
+
+    var buttonColor = Colors.blue;
+    var buttonPressed = (){
+      playerMoney = playerMoney - 10;
+      potMoney = potMoney + 10;
+      currentWager = 10;
+      hideButtons();
+      Future.delayed(const Duration(milliseconds: 1000), () {
+        doOpponentTurn();
+        setState(() {
+        });
+      });
+      setState((){
+      });
+    };
+    if(playerMoney < 10){
+      buttonColor = Colors.grey;
+      buttonPressed = (){};
+    }
+
     return FlatButton(
-        color: Colors.blue,
+        color: buttonColor,
         textColor: Colors.white,
-        onPressed: (){
-          playerMoney = playerMoney - 10;
-          potMoney = potMoney + 10;
-          currentWager = 10;
-          hideButtons();
-          Future.delayed(const Duration(milliseconds: 1000), () {
-            doOpponentTurn();
-            setState(() {
-            });
-          });
-          setState((){
-          });
-        },
+        onPressed: buttonPressed,
         child: Text("Bet (\$10)")
     );
   }
