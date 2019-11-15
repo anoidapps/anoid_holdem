@@ -398,7 +398,7 @@ class GamePageState extends State<GamePage> {
           potMoney = potMoney + 10;
           currentWager = 10;
           hideButtons();
-          Future.delayed(const Duration(milliseconds: 2000), () {
+          Future.delayed(const Duration(milliseconds: 1000), () {
             doOpponentTurn();
             setState(() {
             });
@@ -533,7 +533,7 @@ class GamePageState extends State<GamePage> {
   doOpponentCall(){
     showChatMessage = true;
     chatMessage = "Call";
-    Future.delayed(const Duration(milliseconds: 1000), () {
+    Future.delayed(const Duration(milliseconds: 500), () {
       showChatMessage = false;
       setState(() {
       });
