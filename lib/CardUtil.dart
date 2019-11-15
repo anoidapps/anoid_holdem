@@ -88,7 +88,7 @@ class CardUtil
 
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
-      pair = hand.get(6).getValue;
+      pair = hand.get(6).getValue();
     }
 
     else if (hand.size() == 7)
