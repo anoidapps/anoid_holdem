@@ -30,8 +30,8 @@ class GamePageState extends State<GamePage> {
   var playerCards;
   var opponentCards;
   var potMoney = 0;
-  var playerMoney = 1000;
-  var opponentMoney = 1000;
+  var playerMoney = 100;
+  var opponentMoney = 100;
   var currentWager = 0;
   var newRound = true;
   var showAnteQuitButtons = false;
@@ -65,9 +65,9 @@ class GamePageState extends State<GamePage> {
   }
 
   doAnte(){
-    playerMoney -= 5;
-    opponentMoney -= 5;
-    potMoney = 10;
+    playerMoney -= 10;
+    opponentMoney -= 10;
+    potMoney = 20;
   }
 
   dealCards(){
@@ -371,7 +371,7 @@ class GamePageState extends State<GamePage> {
             showBetCheckFoldButtons = true;
           });
         },
-        child: Text("Ante (\$5)")
+        child: Text("Ante (\$10)")
     );
   }
 
@@ -417,7 +417,7 @@ class GamePageState extends State<GamePage> {
         onPressed: (){
           var newMoney = playerMoney - currentWager;
           potMoney = potMoney + currentWager;
-          Future.delayed(const Duration(milliseconds: 2000), () {
+          Future.delayed(const Duration(milliseconds: 1000), () {
             doOpponentTurn();
             setState(() {
             });
@@ -437,7 +437,7 @@ class GamePageState extends State<GamePage> {
         textColor: Colors.white,
         onPressed: (){
           hideButtons();
-          Future.delayed(const Duration(milliseconds: 2000), () {
+          Future.delayed(const Duration(milliseconds: 1000), () {
             doOpponentTurn();
             setState(() {
             });
@@ -472,9 +472,15 @@ class GamePageState extends State<GamePage> {
         color: Colors.blue,
         textColor: Colors.white,
         onPressed: (){
+          opponentMoney = opponentMoney+potMoney;
+          newRound = true;
+          if(playerMoney <= 0){
+            showAlertDialog("Game Over", "You are out of money. You lose.");
+          }
+          else if(opponentMoney <= 0){
+            showAlertDialog("Game Over", "You win the game!");
+          }
           setState((){
-            opponentMoney = opponentMoney+potMoney;
-            newRound = true;
           });
         },
         child: Text("Fold")
@@ -493,7 +499,7 @@ class GamePageState extends State<GamePage> {
   doOpponentCheck(){
     showChatMessage = true;
     chatMessage = "Check";
-    Future.delayed(const Duration(milliseconds: 2000), () {
+    Future.delayed(const Duration(milliseconds: 1000), () {
       showChatMessage = false;
       setState(() {
       });
@@ -600,5 +606,38 @@ class GamePageState extends State<GamePage> {
       opponentMoney = opponentMoney + potMoney;
     }
     potMoney = 0;
+
+    if(playerMoney <= 0){
+      showAlertDialog("Game Over", "You are out of money. You lose.");
+    }
+    else if(opponentMoney <= 0){
+      showAlertDialog("Game Over", "You win the game!");
+    }
+  }
+
+  showAlertDialog(title, message){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text(title),
+          content: new Text(message),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyApp())
+                );
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 }
