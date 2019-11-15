@@ -106,13 +106,30 @@ class CardUtil
 
     // print("Line 86 " + hand.toString() + "\n");
     // Pointless Comment
-
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
       pair = pair + hand.get(0).getValue();
     }
 
-    else if (hand.size() == 7)
+    if (hand.size() == 5)
+    {
+      if (hand.get(1).getValue() == hand.get(2).getValue())
+      {
+        pair = pair + hand.get(1).getValue();
+      }
+
+      else if (hand.get(2).getValue() == hand.get(3).getValue())
+      {
+        pair = pair + hand.get(2).getValue();
+      }
+
+      else if (hand.get(3).getValue() == hand.get(4).getValue())
+      {
+        pair = pair + hand.get(3).getValue();
+      }
+    }
+
+    if (hand.size() == 7)
     {
       if (hand.get(1).getValue() == hand.get(2).getValue())
       {
@@ -160,6 +177,7 @@ class CardUtil
       i++;
     }
 
+    tempHand.sort();
     i = 0;
 //    while (i < tempHand.size())
 //    {
@@ -181,54 +199,43 @@ class CardUtil
     {
       if (tempHand.get(0).getValue() == tempHand.get(1).getValue())
       {
-        for (int k = 1; k > -1; k--)
-        {
-          tempHand.remove(k);
-        }
+        tempHand.remove(0);
+        tempHand.remove(0);
       }
 
       else if (tempHand.get(1).getValue() == tempHand.get(2).getValue())
       {
-        for (int k = 2; k > 0; k--)
-        {
-          tempHand.remove(k);
-        }
+        tempHand.remove(1);
+        tempHand.remove(1);
       }
 
       else if (tempHand.get(2).getValue() == tempHand.get(3).getValue())
       {
-        for (int k = 3; k > 1; k--)
-        {
-          tempHand.remove(k);
-        }
+        tempHand.remove(2);
+        tempHand.remove(2);
       }
 
       else if (tempHand.get(3).getValue() == tempHand.get(4).getValue())
       {
-        for (int k = 4; k > 2; k--)
-        {
-          tempHand.remove(k);
-        }
+        tempHand.remove(3);
+        tempHand.remove(3);
       }
 
       else if (tempHand.get(4).getValue() == tempHand.get(5).getValue())
       {
-        for (int k = 5; k > 3; k--)
-        {
-          tempHand.remove(k);
-        }
+        tempHand.remove(4);
+        tempHand.remove(4);
       }
 
       else if (tempHand.get(5).getValue() == tempHand.get(6).getValue())
       {
-        for (int k = 6; k > 4; k--)
-        {
-          tempHand.remove(k);
-        }
+        tempHand.remove(5);
+        tempHand.remove(5);
       }
     }
 
     j = isPair(tempHand);
+    // print("Line 221: " + j.toString());
 
     if (i > 0 && j > 0)
     {
@@ -285,7 +292,7 @@ class CardUtil
    */
   static isStraight (Hand hand)
   {
-    int isStraight = -1;
+    int isStraight = 0;
     hand.sort();
 
     if (hand.get(0).getValue() == (hand.get(1).getValue() - 1)
