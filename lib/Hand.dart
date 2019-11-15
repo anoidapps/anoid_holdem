@@ -7,7 +7,11 @@ class Hand
 
   Hand ()
   {
-   this._hand = new List();
+    this._hand = new List();
+  }
+
+  setHand (List<Card> cards){
+    this._hand = cards;
   }
 
   // Used to add a card to the Deck;

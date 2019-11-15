@@ -3,8 +3,7 @@ import 'main.dart';
 import 'CardUtil.dart';
 import 'Deck.dart';
 import 'Card.dart' as c;
-import 'CardRank.dart';
-import 'CardSuit.dart';
+import 'Hand.dart';
 
 class Game extends StatelessWidget {
   @override
@@ -602,14 +601,24 @@ class GamePageState extends State<GamePage> {
   }
 
   computeRoundResult(){
-     List<c.Card> p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2], turn, river];
-     List<c.Card> p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
+    List<c.Card> p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2], turn, river];
+    List<c.Card> p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
+    Hand h1 = new Hand();
+    Hand h2 = new Hand();
+    h1.setHand(new List<c.Card>.from(p1Hand));
+    h2.setHand(new List<c.Card>.from(p2Hand));
 
     var playerScore = CardUtil.scoreHand(p1Hand);
     var opponentScore = CardUtil.scoreHand(p2Hand);
     print('playerScore = ' + playerScore.toString());
     print('opponentScore = ' + opponentScore.toString());
-    winner = playerScore > opponentScore? true: false;
+    if(playerScore == opponentScore){
+      int i = CardUtil.isTie(h1, h2);
+      winner = i > 0;
+    }
+    else{
+      winner = playerScore > opponentScore? true: false;
+    }
     if(winner){
       playerMoney = playerMoney + potMoney;
     }
