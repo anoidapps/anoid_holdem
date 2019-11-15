@@ -75,7 +75,23 @@ class CardUtil
 
   static isTie (Hand hand, Hand opHand)
   {
+    hand.sort();
+    opHand.sort();
 
+    if (hand.get(6).getValue() > opHand.get(6).getValue())
+      {
+        return 1;
+      }
+
+    if (hand.get(6).getValue() == opHand.get(6).getValue())
+    {
+      return 0;
+    }
+
+    if (hand.get(6).getValue() < opHand.get(6).getValue())
+    {
+      return -1;
+    }
   }
 
   /*
@@ -85,7 +101,7 @@ class CardUtil
    */
   static isPair (Hand hand)
   {
-    var pair = -1;
+    var pair = 0;
     hand.sort();
 
     // print("Line 86 " + hand.toString() + "\n");
@@ -93,7 +109,7 @@ class CardUtil
 
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
-      pair = hand.get(0).getValue();
+      pair = pair + hand.get(0).getValue();
     }
 
     else if (hand.size() == 7)
@@ -156,8 +172,8 @@ class CardUtil
     i = 0;
     int j = 0;
 
-    isTwoPair[0] = -1;
-    isTwoPair[1] = -1;
+    isTwoPair[0] = 0;
+    isTwoPair[1] = 0;
 
     i = isPair(tempHand);
 
@@ -231,7 +247,7 @@ class CardUtil
    */
  static isThreeKind (Hand hand)
   {
-    int isThreeKind = -1;
+    int isThreeKind = 0;
     hand.sort();
 
     if (hand.get(0).getValue() == hand.get(1).getValue() && hand.get(1).getValue() == hand.get(2).getValue())
@@ -249,9 +265,14 @@ class CardUtil
       isThreeKind = hand.get(2).getValue();
     }
 
-    else if (hand.get(3).getValue() == hand.get(4).getValue() && hand.get(5).getValue() == hand.get(6).getValue())
+    else if (hand.get(3).getValue() == hand.get(4).getValue() && hand.get(4).getValue() == hand.get(5).getValue())
     {
       isThreeKind = hand.get(3).getValue();
+    }
+
+    else if (hand.get(4).getValue() == hand.get(5).getValue() && hand.get(5).getValue() == hand.get(6).getValue())
+    {
+      isThreeKind = hand.get(4).getValue();
     }
 
     return isThreeKind;
