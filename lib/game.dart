@@ -3,6 +3,8 @@ import 'main.dart';
 import 'CardUtil.dart';
 import 'Deck.dart';
 import 'Card.dart' as c;
+import 'CardRank.dart';
+import 'CardSuit.dart';
 
 class Game extends StatelessWidget {
   @override
@@ -600,8 +602,9 @@ class GamePageState extends State<GamePage> {
   }
 
   computeRoundResult(){
-    List<c.Card> p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2], turn, river];
-    List<c.Card> p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
+     List<c.Card> p1Hand = [playerCards[0], playerCards[1], flop[0], flop[1], flop[2], turn, river];
+     List<c.Card> p2Hand = [opponentCards[0], opponentCards[1], flop[0], flop[1], flop[2], turn, river];
+
     var playerScore = CardUtil.scoreHand(p1Hand);
     var opponentScore = CardUtil.scoreHand(p2Hand);
     print('playerScore = ' + playerScore.toString());
