@@ -101,7 +101,7 @@ class CardUtil
    */
   static isPair (Hand hand)
   {
-    var pair = -1;
+    var pair = 0;
     hand.sort();
 
     // print("Line 86 " + hand.toString() + "\n");
@@ -109,7 +109,7 @@ class CardUtil
 
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
-      pair = hand.get(0).getValue();
+      pair = pair + hand.get(0).getValue();
     }
 
     else if (hand.size() == 7)
