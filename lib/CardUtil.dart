@@ -84,6 +84,7 @@ class CardUtil
     hand.sort();
 
     // print("Line 86 " + hand.toString() + "\n");
+    // Pointless Comment
 
     if (hand.get(0).getValue() == hand.get(1).getValue())
     {
